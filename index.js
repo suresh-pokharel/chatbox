@@ -9,7 +9,11 @@ app.get('/', function(req, res){
 io.on('connection', function(socket){
 	var user_id = Math.floor((Math.random() * 10000) + 1);
 	socket.on('chat message', function(msg){
-    	io.emit('chat message', msg);
+		var data = {
+			user_id : user_id,
+			msg: msg
+		};
+    	io.emit('chat message', data);
   });
 
 	socket.on('connection success', function(msg){
@@ -17,13 +21,12 @@ io.on('connection', function(socket){
   });
 
 	socket.on('disconnect', function(msg){
-    	io.emit('disconnected','user-' + user_id + msg );
+    	io.emit('disconnected','user-' + user_id);
   });
-
 
 });
 
 
 http.listen(3000, function(){
-	console.log('listening on *:3000');
+	console.log('listening on localhost:3000');
 });
