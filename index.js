@@ -8,7 +8,7 @@ app.get('/', function(req, res){
 
 io.on('connection', function(socket){
 	var user_id = Math.floor((Math.random() * 10000) + 1);
-	socket.emit('my id',user_id);					// emit the user's id 
+	socket.emit('my id',user_id);					// Emits the user id 
 	
 	socket.on('chat message', function(msg){
 		var data = {
